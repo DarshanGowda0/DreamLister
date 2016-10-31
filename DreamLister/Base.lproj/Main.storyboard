@@ -30,10 +30,10 @@
                                 </segments>
                                 <color key="tintColor" red="0.54909204980000004" green="0.54909204980000004" blue="0.54909204980000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="150" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kPr-4L-7T7">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="150" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kPr-4L-7T7">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ItemCell" rowHeight="150" id="FZz-A6-fP0" customClass="ItemCell" customModule="DreamLister" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ItemCell" rowHeight="150" id="FZz-A6-fP0" customClass="ItemCell" customModule="DreamLister" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="374" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FZz-A6-fP0" id="ST7-db-3eu">
@@ -208,6 +208,9 @@
                                 <state key="normal" title="Save Item">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="buttonPressed:" destination="26k-JK-39Y" eventType="touchUpInside" id="tTj-PH-QWR"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -239,8 +242,17 @@
                     <navigationItem key="navigationItem" title="Add/Edit" id="gBg-Dh-uaR">
                         <barButtonItem key="rightBarButtonItem" systemItem="trash" id="Ku3-X3-fNE">
                             <color key="tintColor" red="1" green="0.26092621071620481" blue="0.24765035309387717" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="deletePressed:" destination="26k-JK-39Y" id="EZP-6z-2Zs"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="detailsField" destination="hUX-R7-Gv4" id="O38-jc-X9Y"/>
+                        <outlet property="priceField" destination="k0t-kf-LAQ" id="PTe-x4-vsB"/>
+                        <outlet property="storePicker" destination="7Ji-yh-Iei" id="FPQ-1Z-lvz"/>
+                        <outlet property="titleField" destination="8Dj-Hc-mjJ" id="nVm-qX-5gB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PgG-Hr-l9a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
