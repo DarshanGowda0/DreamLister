@@ -9,16 +9,21 @@
 import UIKit
 import CoreData
 
-class ItemdetailsVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
+class ItemdetailsVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource,
+                        UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var priceField: UITextField!
     @IBOutlet weak var detailsField: UITextField!
     @IBOutlet weak var storePicker: UIPickerView!
    
+    @IBOutlet weak var imageView: UIImageView!
     var stores  = [Store]()
     
     var itemToEdit : Item?
+    
+    var imagePicker : UIImagePickerController!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +41,9 @@ class ItemdetailsVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSourc
         if itemToEdit != nil{
             loadItemData()
         }
+        
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
         
     }
     
@@ -101,11 +109,18 @@ class ItemdetailsVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSourc
         
         var item : Item!
         
+        let picture = Image(context: context)
+        picture.image = imageView.image
+        
+        
+        
         if itemToEdit == nil {
             item = Item(context: context)
         }else{
             item = itemToEdit
         }
+        
+        item.toImage = picture
         
         if let title = titleField.text{
             item.title  = title
@@ -134,6 +149,8 @@ class ItemdetailsVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSourc
             priceField.text = "\(item.price)"
             detailsField.text = item.details
             
+            imageView.image = item.toImage?.image as? UIImage
+            
             if let store = item.toStore{
             
                 var index = 0
@@ -161,6 +178,22 @@ class ItemdetailsVC: UIViewController,UIPickerViewDelegate,UIPickerViewDataSourc
         
         _ = navigationController?.popViewController(animated: true)
         
+        
+    }
+    
+    @IBAction func imagePickerButtonPressed(_ sender: AnyObject) {
+        
+        present(imagePicker, animated: true, completion: nil)
+        
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        if let image  = info[UIImagePickerControllerOriginalImage] as? UIImage{
+            imageView.image = image
+        }
+        
+        imagePicker.dismiss(animated: true, completion: nil)
         
     }
     
